@@ -1,0 +1,36 @@
+<%- include('partials/header.ejs') %>
+<%- include('partials/navbar.ejs') %>
+
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header bg-dark">
+            <h2 class="text-white text-center">Tabela de compras</h2>
+        </div>
+        <div class="card body">
+            <table class="table table-striped table-dark table-hover table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>Usuario</th>
+                        <th>Item</th>
+                        <th>Preço</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% amostra.forEach(amostra =>{ %>
+                        <tr class="text-center">
+                            <td> <%= amostra.usuario %> </td>
+                            <td> <%= amostra.item %> </td>
+                            <td> <%= amostra.valor %> </td>
+                            <td> <%= amostra.data_compra %> </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') %>
+

@@ -40,6 +40,12 @@ app.post("/compras/cadastro",async (req,res)=>{
     })
 })
 
+app.get("/amostra", async(req, res)=>{
+    var amostra = await knex.raw('SELECT * FROM compras')
+    console.log(amostra[0])
+    res.render('tabela',{amostra: amostra[0]})
+})
+
 app.get("/saldo", (req,res)=>{
     res.render("saldo")
 })
