@@ -1,0 +1,49 @@
+<%- include  ('partials/header.ejs') %>
+<%- include  ('partials/navbar.ejs') %>
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>Gestão Financeira</h2>
+        </div>
+        <div class="card-body">
+            <h3 class="fw-bold">Cadastro de compras</h3>
+            <hr>
+            <form action="/compras/cadastro" method="post">
+                <div class="form-group">
+                    <label class="fw-bold">Usuário</label>
+                    <br>
+                    <input class="form-control" type="text" name="nome" id="name" placeholder="Nome do Usuário">
+                    <hr>
+                    <label class="fw-bold">Item</label>
+                    <input class="form-control" type="text" name="item" id="item" placeholder="Item">
+                    <hr>
+                    <label for="" class="fw-bold">Valor da compra</label>
+                    <input type="text" class="form-control" aria-describedby="emailHelper" name="valor" placeholder="valor" onkeypress="$(this).mask('#.##0,00', {reverse: true})" required/>
+                    <hr>
+                    <label class="fw-bold">Forma de pagamento</label>
+                    <select name="options" class="form-select">
+                        <option value="1">Cartão Débito</option>
+                        <option value="2">Cartão Crédito</option>
+                        <option value="3">Dinheiro</option>
+                        <option value="4">Pix</option>
+                        <option value="5">Boleto</option>
+                    </select>
+                    <hr>
+                    <label class="fw-bold">Parcelado</label>
+                    <select class="form-select" id="option" name="parcelas">
+                        <option value="1">Sim</option>
+                        <option value="2">Não</option>
+                    </select>
+                    <hr>
+                    <label class="fw-bold">Data da compra</label>
+                    <input class="form-control" type="date" name="dia" id="dia">                    
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-dark btn-block">Confirmar</button>
+            </form> 
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<%- include  ('partials/footer.ejs') %>
