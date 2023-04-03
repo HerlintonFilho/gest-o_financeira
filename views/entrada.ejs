@@ -1,0 +1,59 @@
+<%- include  ('partials/header.ejs') %>
+<%- include  ('partials/navbar.ejs') %>
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>Gestão Financeira</h2>
+        </div>
+        <div class="card-body">
+            <h3 class="fw-bold">Cadastro de entrada de valores</h3>
+            <hr>
+            <form action="/entrada/cadastro" method="post">
+                <div class="form-group">
+                    <label class="fw-bold">Usuário</label>
+                    <br>
+                    <input class="form-control" type="text" name="name" id="name" placeholder="Nome do Usuário">
+                    <hr>
+                    <label class="fw-bold">Valor da entrada</label>
+                    <br>
+                    <input type="text" class="form-control" aria-describedby="emailHelper" name="valorEntrada" placeholder="valor" onkeypress="$(this).mask('#.##0,00', {reverse: true})" required/>
+                    <hr>
+                    <label class="fw-bold">Motivo da entrada</label>
+                    <br>
+                    <input type="text" name="motivo" id="motivo" placeholder="Motivo" class="form-control">
+                    <hr>
+                    <label class="fw-bold">Data da entrada</label>
+                    <br>
+                    <input class="form-control" type="date" name="dia" id="dia">
+                </div>
+                <hr>
+                <button type="submit" class="btn btn-dark btn-block">Confirmar</button>
+            </form> 
+        </div>
+    </div>
+    <hr>
+        <br>
+        <table class="table table-striped table-dark table-hover table-bordered">
+            <thead>
+                <tr class="text-center">
+                    <th>Nome do Usuario</th>
+                    <th>Motivo</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% entradas.forEach(entradas =>{ %>
+                    <tr class="text-center">
+                        <td> <%= entradas.nome %> </td>
+                        <td> <%= entradas.motivo %> </td>
+                        <td> <%= entradas.valor_entrada %> </td>
+                        <td> <%= entradas.data %> </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<%- include  ('partials/footer.ejs') %>

@@ -22,6 +22,8 @@ app.get("/",(req, res)=>{
     res.render("index")
 })
 
+
+//Rotas de cadastro de compras
 app.get("/compras",(req, res)=>{
     res.render("compras")
 })
@@ -40,12 +42,40 @@ app.post("/compras/cadastro",async (req,res)=>{
     })
 })
 
+
+//rota para visualizar as compras feitas
 app.get("/amostra", async(req, res)=>{
-    var amostra = await knex.raw('SELECT * FROM compras')
+    var amostra = await knex.raw('SELECT usuario, item, valor, DATE_FORMAT(data_compra,"%y/%m/%d") as data FROM compras')
     console.log(amostra[0])
     res.render('tabela',{amostra: amostra[0]})
 })
 
+
+//rota para entrada de valores
+app.get("/entrada", async(req,res)=>{
+    var entrada =  await knex.raw('SELECT nome, motivo, valor_entrada, DATE_FORMAT(data_entrada,"%y/%m/%d") as data FROM entrada')
+    console.log(entrada[0])
+    res.render("entrada", {entradas: entrada[0]})
+})
+
+app.post("/entrada/cadastro", async (req, res) =>{
+    var nome = req.body.name
+    var valorEntrada = req.body.valorEntrada
+    var valorReal = parseFloat(valorEntrada)
+    var motivo =  req.body.motivo
+    var dia =  req.body.dia
+
+    await knex.raw(`INSERT INTO entrada(nome, motivo, data_entrada, valor_entrada) VALUES('${nome}', '${motivo}', '${dia}', '${valorReal}')`).then(data =>{
+        console.log("Valor inserido na tabela", data)
+        res.redirect("/entrada")
+    }).catch(err =>{
+        console.log(err)
+    })
+
+})
+
+
+//rota para visualizar o saldo da data selecionada
 app.get("/saldo", (req,res)=>{
     res.render("saldo")
 })
