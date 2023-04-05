@@ -36,7 +36,7 @@ app.post("/compras/cadastro",async (req,res)=>{
     var dia = req.body.dia
     await knex.raw(`INSERT INTO compras(usuario, item, valor, data_compra) VALUES('${usuario}','${item}','${preco}', '${dia}')`).then(data =>{
         console.log("Compra inserida na tabela", data)
-        res.redirect("/")
+        res.redirect("/amostra")
     }).catch(err =>{
         console.log(err)
     })
@@ -76,8 +76,14 @@ app.post("/entrada/cadastro", async (req, res) =>{
 
 
 //rota para visualizar o saldo da data selecionada
-app.get("/saldo", (req,res)=>{
-    res.render("saldo")
+app.get("/saldo", async(req,res)=>{
+    var soma_compra = await knex.raw('SELECT SUM(valor) FROM compras')
+    var soma_entrada = await knex.raw('SELECT SUM(valor_entrada) FROM entrada')
+    console.log(soma_entrada[0][0]['SUM(valor_entrada)'])
+    console.log(soma_compra[0][0]['SUM(valor)'])
+    var total = (soma_entrada[0][0]['SUM(valor_entrada)']) - (soma_compra[0][0]['SUM(valor)'])
+    console.log(total)
+    res.render("saldo",{total: total})
 })
 
 //Server

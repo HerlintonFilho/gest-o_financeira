@@ -1,0 +1,16 @@
+<%- include  ('partials/header.ejs') %>
+<%- include  ('partials/navbar.ejs') %>
+<div class="container">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>Gestão Financeira</h2>
+        </div>
+        <div class="card-body">
+            <% if(total < 0){ %>
+                <h3 class="fw-bold">O seu saldo é: <b class="text-danger"><%= total %></b></h3>
+            <% }else if (total > 0){ %>
+                <h3 class="fw-bold">O seu saldo é de: <b class="text-success ">R$<%= total %>,00</b></h3>
+            <% } %>
+            <p class="fw-bold">Lorem Ipsum Dolor It Samet Lorem Ipsum Dolor It Samet Lorem Ipsum Dolor It Samet Lorem Ipsum Dolor It Samet Lorem Ipsum Dolor It Samet</p>
+</div>
+<%- include  ('partials/footer.ejs') %>
