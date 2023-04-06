@@ -32,7 +32,7 @@ app.post("/compras/cadastro",async (req,res)=>{
     var usuario = req.body.nome;
     var item = req.body.item;
     var valor = req.body.valor
-    var preco = parseFloat(valor)
+    var preco = valor.replaceAll(',','.')
     var dia = req.body.dia
     await knex.raw(`INSERT INTO compras(usuario, item, valor, data_compra) VALUES('${usuario}','${item}','${preco}', '${dia}')`).then(data =>{
         console.log("Compra inserida na tabela", data)
@@ -61,9 +61,10 @@ app.get("/entrada", async(req,res)=>{
 app.post("/entrada/cadastro", async (req, res) =>{
     var nome = req.body.name
     var valorEntrada = req.body.valorEntrada
-    var valorReal = parseFloat(valorEntrada)
+    var valorReal = valorEntrada.replaceAll(',','.')
     var motivo =  req.body.motivo
     var dia =  req.body.dia
+    console.log(valorReal)
 
     await knex.raw(`INSERT INTO entrada(nome, motivo, data_entrada, valor_entrada) VALUES('${nome}', '${motivo}', '${dia}', '${valorReal}')`).then(data =>{
         console.log("Valor inserido na tabela", data)
