@@ -84,7 +84,7 @@ app.get("/saldo", async(req,res)=>{
     console.log(soma_compra[0][0]['SUM(valor)'])
     var total = (soma_entrada[0][0]['SUM(valor_entrada)']) - (soma_compra[0][0]['SUM(valor)'])
     console.log(total)
-    res.render("saldo",{total: total})
+    res.render("saldo",{total: total.toFixed(2).toString()})
 })
 
 //Server
